@@ -1,0 +1,77 @@
+<div class="pb-4" [class]="ltr?'ltr-date':'date'">
+    <div>
+        <div class="row g-2 justify-content-center">
+            <div class="col-12 d-flex flex-wrap justify-content-between py-4 py-xl-0">
+                <div>
+                    <div class="d-flex pt-2">
+                        <p class="date-pra mb-2">{{'date' | translate}}</p>
+                        <div class="pointers mb-2">
+                            <span class="span-1" (click)="calc(-1,'arrow')"></span>
+                            <span class="span-2" (click)="calc(1,'arrow')"></span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <div class="date-inp position-relative">
+                            <div class="date-text d-flex">
+                                <mat-icon>date_range</mat-icon>
+                                <p>
+                                    <span class="mx-1">{{month | translate}}</span>
+                                    <span>{{year}}</span>
+                                </p>
+                            </div>
+                            <input 
+                                type="date"  
+                                [(ngModel)]="fromDate" 
+                                (change)="getDate($event.target)" 
+                                class="date-input" 
+                            >
+                            <mat-icon>keyboard_arrow_down</mat-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="days d-flex flex-wrap justify-content-center">
+                    <div (click)="calc(i,'active')"
+                        *ngFor="let day of days ; let i =index" 
+                        class="day mb-2 text-center" 
+                        [class]="i===num?'active':'not-active'"
+                    >
+                        <h5>{{day}}</h5>
+                        <span>{{dayNum+i-num}}</span>
+                    </div>
+                </div>
+            </div>
+            <div cdkDropList class="example-list row g-3" (cdkDropListDropped)="drop($event)">
+                <div class="col-12 px-0" *ngFor="let user of users ; let i =index" cdkDrag>
+                    <div
+                        class="user-card" 
+                        [style.backgroundColor]="user.light? user.light : user.dark"
+                        [class]="user.light? 'light':'dark'"
+                    >
+                        <p class="card-pra">
+                            {{user.pra | translate}}
+                        </p>
+                        <span class="card-date">
+                            <span><mat-icon class="fs-5">access_time</mat-icon></span>
+                            <span>{{user.from}}-{{user.to}} {{user.time}}</span>
+                        </span>
+                        <div class="personal-data d-flex justify-content-between">
+                            <div class="user-data d-flex align-items-center">
+                                <div class="image ms-2">
+                                    <img [src]="user.src" [alt]="user.uName">
+                                </div>
+                                <h4>{{user.uName}}</h4>
+                            </div>
+                            <div class="arrow text-center">
+                                <mat-icon>arrow_back</mat-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>

@@ -1,0 +1,23 @@
+<div class="pt-3 container" [style.direction]="dir">
+  <div class="row">
+    <div class="col-xl-2">
+      <select class="" (change)="switchLanguage($event.target)">
+        <option value="en">{{'English' |translate}}</option>
+        <option selected value="ar">{{'Arabic' |translate}}</option>
+      </select>
+      <app-navigation [ltr]="ltr"/>
+    </div>
+    <div class="m-60 col-xl-10 pt-xl-3 px-xl-0">
+      <div class="row">
+        <div class="col-xl-8">
+          <div>
+            <app-main-content  [ltr]="ltr"/>
+          </div>
+        </div>
+        <div class="col-xl-4 d-flex justify-content-center">
+          <app-date  [ltr]="ltr"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+.reading{
+    .read-card{
+        // max-width: 195px;
+        min-height: 105.5px;
+        position: relative;
+        color: #fff;
+        border-radius: 15px;
+        padding: 16px;
+        h5{
+            margin-bottom: 8px;
+            font-size: 11px;
+            font-weight: 400;
+            line-height: 13px;
+            letter-spacing: 0.375px;
+
+        }
+        div{
+            display: flex;
+            margin-bottom: 0;
+            font-size: 19px;
+            font-weight: 500;
+            line-height: 23px;
+            letter-spacing: 0.375px;
+            .image{width: 18px;height: 18px; margin: 0 5px;}
+        }
+    }
+    .read-card:nth-child(1){
+        background-color: #FF9A3E;
+    }
+    .read-card:nth-child(2){
+        background-color: #7661E2;
+        margin: 16px 0;
+    }
+    .read-card:nth-child(3){
+        background-color: #3DD598;
+    }
+}
+
+@media screen and (min-width: 991px) {
+    .read-card{
+        width: 100% !important;
+    }
+}

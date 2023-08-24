@@ -1,0 +1,30 @@
+<div class="main">
+    <div class="container-fluid">
+        <div class="row g-3">
+            <div class="col-12">
+                <div class="upper">
+                    <div class="row g-3 d-flex align-content-lg-stretch" [class]="ltr?'flex-row-reverse':'flex-row'">
+                        <div class="col-md-4">
+                            <div class="content">
+                                <app-user  [ltr]="ltr" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="content">
+                                <app-statistics  [ltr]="ltr" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="h-100">
+                                <app-reading  [ltr]="ltr" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <app-table  [ltr]="ltr"/>
+            </div>
+        </div>
+    </div>
+</div>
