@@ -7,12 +7,19 @@ import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray} from '@angular/cdk/d
 })
 export class DateComponent implements AfterViewInit{
   @Input() ltr :boolean = false
+  date:any
   num:number=1
+  num1:number=1
+  num2:number=1
   days=['Sun','Mon','thu','Win','Thr','Fri','Sat']
   dayNum:number=1
   month!:string
   year!:number
+  lastDay0!:number
+  lastDay1!:number
+  lastDay2!:number
   fromDate:any
+  currentDate:any
   monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
@@ -24,33 +31,44 @@ export class DateComponent implements AfterViewInit{
   ]
 
   calc(n:number,key:string){
+    let index =1
     if (key==='arrow') {
-      if (this.num===0&&n===-1) {
-        this.num=6
-      }
-      else if  (this.num===6&&n===1) {
-        this.num=0
-      }else{
-        this.num+=n
-      }
-    }else{
-      this.num=n
+      index=n
     }
-    
+    else{
+      console.log();
+      
+    }
+    console.log(this.date);
+    let newDate=this.date.setDate(this.date.getDate()+index)
+    console.log(this.date);
+    this.getDate(newDate)
   }
 
   ngAfterViewInit(): void {
-    this.fromDate= "2023-03-22"
+    this.fromDate= "2023-02-28"
     this.getDate(this.fromDate)
   }
 
-  getDate(e:any){
-    let date 
-    e.value==undefined?date=new Date(e):date=new Date(e.value)
-    this.dayNum=date.getDate()
-    this.num=date.getDay()
-    this.month=this.monthNames[date.getMonth()]
-    this.year=date.getFullYear()
+  getDate(e:any,html?:any){ 
+    if(html===undefined){
+      this.date=new Date(e)
+      this.fromDate=e
+    }else{
+      this.date=new Date(e.value)
+    }
+    
+    this.num2=this.date.getDay() 
+    this.num=this.num2
+    this.num1=this.num2
+    this.dayNum=this.date.getDate()-this.num
+    this.month=this.monthNames[this.date.getMonth()]
+    this.year=this.date.getFullYear()
+    this.lastDay0=new Date(this.date.getFullYear(), this.date.getMonth() , 0).getDate()
+    this.lastDay1=new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0).getDate()
+    this.lastDay2=new Date(this.date.getFullYear(), this.date.getMonth() + 2, 0).getDate()
+    // console.log(this.date.setDate(this.date.getDate()+2).toString() ,this.date);
+    
   }
 
   drop(event: CdkDragDrop<string[]>) {

@@ -10,7 +10,6 @@ import {MatSort, MatSortModule} from '@angular/material/sort';
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements AfterViewInit ,OnInit{
-  
   @Input() ltr :boolean = false
   displayedColumns: string[] = ['id', 'fullName', 'email', 'daysOfWork','files','setting'];
   heads: string[] = ['id', 'fullName', 'email', 'daysOfWork','files'];

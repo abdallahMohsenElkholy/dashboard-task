@@ -1,4 +1,4 @@
-<div class="pb-4" [class]="ltr?'ltr-date':'date'">
+<div class="py-3" [class]="ltr?'ltr-date':'date'">
     <div>
         <div class="row g-2 justify-content-center">
             <div class="col-12 d-flex flex-wrap justify-content-between py-4 py-xl-0">
@@ -24,7 +24,7 @@
                             <input 
                                 type="date"  
                                 [(ngModel)]="fromDate" 
-                                (change)="getDate($event.target)" 
+                                (change)="getDate($event.target,'date')" 
                                 class="date-input" 
                             >
                             <mat-icon>keyboard_arrow_down</mat-icon>
@@ -34,13 +34,15 @@
             </div>
             <div class="col-12">
                 <div class="days d-flex flex-wrap justify-content-center">
-                    <div (click)="calc(i,'active')"
+                    <div 
                         *ngFor="let day of days ; let i =index" 
                         class="day mb-2 text-center" 
-                        [class]="i===num?'active':'not-active'"
+                        [class]="i===num1?'active':'not-active'"
                     >
                         <h5>{{day}}</h5>
-                        <span>{{dayNum+i-num}}</span>
+                        <span *ngIf="dayNum+i<1">{{lastDay0+dayNum+i}}</span>
+                        <span *ngIf="dayNum+i>0&&dayNum+i<=lastDay1">{{dayNum+i}}</span>
+                        <span *ngIf="dayNum+i>lastDay1">{{i-num2}}</span>
                     </div>
                 </div>
             </div>
@@ -63,7 +65,7 @@
                                 <div class="image ms-2">
                                     <img [src]="user.src" [alt]="user.uName">
                                 </div>
-                                <h4>{{user.uName}}</h4>
+                                <h4>{{user.uName | translate}}</h4>
                             </div>
                             <div class="arrow text-center">
                                 <mat-icon>arrow_back</mat-icon>

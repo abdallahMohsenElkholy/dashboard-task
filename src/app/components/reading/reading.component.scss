@@ -1,7 +1,7 @@
 .reading{
     .read-card{
         // max-width: 195px;
-        min-height: 105.5px;
+        min-height: 32%;
         position: relative;
         color: #fff;
         border-radius: 15px;
@@ -26,13 +26,15 @@
     }
     .read-card:nth-child(1){
         background-color: #FF9A3E;
+        margin: 1% 0 0 0;
     }
     .read-card:nth-child(2){
         background-color: #7661E2;
-        margin: 16px 0;
+        margin: 1% 0;
     }
     .read-card:nth-child(3){
         background-color: #3DD598;
+        margin: 0 0 1% 0;
     }
 }
 

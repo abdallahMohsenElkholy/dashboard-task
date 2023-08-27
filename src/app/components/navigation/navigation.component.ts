@@ -28,7 +28,6 @@ export class NavigationComponent {
           }
         }else{
           this.arrow=this.arrow2='expand_more'
-          this.resNav=false
         }
       }
       if (opt==='close') {
@@ -37,7 +36,6 @@ export class NavigationComponent {
     }else{
       this.open=false
       this.arrow=this.arrow2='expand_more'
-      this.resNav=false
     }
   }
 }

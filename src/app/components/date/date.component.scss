@@ -8,6 +8,10 @@
     }
     .pointers{
         .span-2{
+            transition:.3s ease-in-out;
+            &:hover{
+                color:#FEEE00;
+            }
             display: inline-block;
             width: 10px;
             height: 10px;
@@ -19,6 +23,10 @@
             cursor: pointer;
         }
         .span-1{
+            transition:.3s ease-in-out;
+            &:hover{
+                color:#FEEE00;
+            }
             display: inline-block;
             width: 10px;
             height: 10px;
@@ -71,10 +79,9 @@
         padding: 30px 0;
         border: 0.75px dashed #EEEDF2;
         .day{
-            padding: 10px;
+            padding: 10px 10px 12px;
             border-radius: 9px;
             margin: 0 2px;
-            cursor: pointer;
             h5{
                 font-size: 10px;
                 font-weight: 400;
@@ -90,6 +97,27 @@
                 height: 29px;
                 border-radius: 50%;
                 padding-top: 7.5px;
+                position: relative;
+                &::after{
+                    position: absolute;
+                    content: '';
+                    width: 5px;
+                    height: 5px;
+                    background: #FC9A00;
+                    bottom: -8px;
+                    left: 30%;
+                    border-radius: 50%;
+                }
+                &::before{
+                    position: absolute;
+                    content: '';
+                    width: 5px;
+                    height: 5px;
+                    background: #3DD598;
+                    bottom: -8px;
+                    right: 30%;
+                    border-radius: 50%;
+                }
             }
         }
     }
@@ -148,6 +176,10 @@
     }
     .pointers{
         .span-2{
+            transition:.3s ease-in-out;
+            &:hover{
+                color:#FEEE00;
+            }
             display: inline-block;
             width: 10px;
             height: 10px;
@@ -159,6 +191,10 @@
             cursor: pointer;
         }
         .span-1{
+            transition:.3s ease-in-out;
+            &:hover{
+                color:#FEEE00;
+            }
             display: inline-block;
             width: 10px;
             height: 10px;
@@ -211,10 +247,9 @@
         padding: 30px 0;
         border: 0.75px dashed #EEEDF2;
         .day{
-            padding: 10px;
+            padding: 10px 10px 12px;
             border-radius: 9px;
             margin: 0 2px;
-            cursor: pointer;
             h5{
                 font-size: 10px;
                 font-weight: 400;
@@ -230,6 +265,27 @@
                 height: 29px;
                 border-radius: 50%;
                 padding-top: 7.5px;
+                position: relative;
+                &::after{
+                    position: absolute;
+                    content: '';
+                    width: 5px;
+                    height: 5px;
+                    background: #FC9A00;
+                    bottom: -8px;
+                    right: 30%;
+                    border-radius: 50%;
+                }
+                &::before{
+                    position: absolute;
+                    content: '';
+                    width: 5px;
+                    height: 5px;
+                    background: #3DD598;
+                    bottom: -8px;
+                    left: 30%;
+                    border-radius: 50%;
+                }
             }
         }
     }
@@ -329,5 +385,12 @@
     }
     span{
         color: #1C1C28;
+    }
+}
+
+.span-1 ,.span-2{
+    transition: .2.2s;
+    &:hover{
+        border-color: #FEEE00 !important;
     }
 }
