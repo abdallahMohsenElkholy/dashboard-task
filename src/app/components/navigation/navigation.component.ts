@@ -1,12 +1,49 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss']
+  styleUrls: ['./navigation.component.scss'],
+  animations: [
+    trigger('openClose', [
+      // ...
+      state(
+        'open',
+        style({
+          right: '0',
+        })
+      ),
+      state(
+        'closed',
+        style({
+          right: '-220px',
+        })
+      ),
+      transition('closed <=> open', [animate('0.6s')]),
+    ]),
+    trigger('openCloseLtr', [
+      // ...
+      state(
+        'open',
+        style({
+          left: '0',
+        })
+      ),
+      state(
+        'closed',
+        style({
+          left: '-220px',
+        })
+      ),
+      transition('open => closed', [animate('1s')]),
+      transition('closed => open', [animate('0.5s')]),
+    ]),
+  ],
 })
 export class NavigationComponent {
   activeLink='home'
+  isOpen=false
   resNav=false
   open=false
   arrow='expand_more'

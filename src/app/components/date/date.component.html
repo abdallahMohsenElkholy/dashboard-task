@@ -40,9 +40,9 @@
                         [class]="i===num1?'active':'not-active'"
                     >
                         <h5>{{day}}</h5>
-                        <span *ngIf="dayNum+i<1">{{lastDay0+dayNum+i}}</span>
+                        <span *ngIf="dayNum+i<1" class="bg-info">{{lastDay0+dayNum+i}}</span>
                         <span *ngIf="dayNum+i>0&&dayNum+i<=lastDay1">{{dayNum+i}}</span>
-                        <span *ngIf="dayNum+i>lastDay1">{{i-num2}}</span>
+                        <span *ngIf="dayNum+i>lastDay1" class="bg-danger">{{i-num2}}</span>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                         </p>
                         <span class="card-date">
                             <span><mat-icon class="fs-5">access_time</mat-icon></span>
-                            <span>{{user.from}}-{{user.to}} {{user.time}}</span>
+                            <span>{{user.from}}-{{user.to}} {{user.time | translate}}</span>
                         </span>
                         <div class="personal-data d-flex justify-content-between">
                             <div class="user-data d-flex align-items-center">

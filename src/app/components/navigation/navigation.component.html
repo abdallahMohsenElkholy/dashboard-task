@@ -1,19 +1,17 @@
 <div class="logo d-flex">
-    <div class="nav-icon" (click)="resNav=true">
-        <mat-icon>view_headline</mat-icon>
-    </div> 
     <div class="image" [class]="resNav?'opacity-0':''">
         <img src="assets/images/logo.png" alt="logo" class="img-fluid">
     </div>
 </div>
-<div class=" d-flex flex-column" [class]="ltr?'ltr-responsive-nav':'responsive-nav'" *ngIf="resNav">
+<div [@openClose]="isOpen ? 'open' : 'closed'" class=" d-flex flex-column" [class]="ltr?'ltr-responsive-nav':'responsive-nav'">
+    <div class="nav-icon" (click)="isOpen=!isOpen">
+        <mat-icon>menu</mat-icon>
+    </div> 
     <div class="d-flex justify-content-between flex-wrap p-2 ">
         <div class="image">
             <img src="assets/images/logo.png" alt="logo" class="img-fluid">
         </div>
-        <div class="x-icon align-self-center" (click)="resNav=false">
-            <mat-icon class="text-danger">clear</mat-icon>
-        </div>
+
     </div>
     
     <div [class]="ltr?'ltr-res-side-navigation':'res-side-navigation'">

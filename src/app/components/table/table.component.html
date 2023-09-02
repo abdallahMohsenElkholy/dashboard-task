@@ -16,7 +16,7 @@
               matTooltip='{{"filter"|translate}} {{"fullName" | translate}}'
               matTooltipPosition="above"
             >
-              <mat-icon> import_export</mat-icon>
+              <mat-icon> swap_vert</mat-icon>
             </div>
           </div>
         </div>
@@ -29,39 +29,61 @@
     
 
     
-    <table mat-table [dataSource]="dataSource" matSort cdkDropListGroup>
+    <table mat-table [dataSource]="dataSource" matSort cdkDropListOrientation="horizontal" cdkDropList (cdkDropListDropped)="drop($event)">
         <!-- id Column -->
-        <ng-container cdkDrag matColumnDef="id">
-          <th mat-header-cell mat-sort-header *matHeaderCellDef>{{'id' | translate}}</th>
+        <ng-container matColumnDef="id">
+          <th mat-header-cell cdkDrag mat-sort-header *matHeaderCellDef>{{'id' | translate}}</th>
           <td mat-cell *matCellDef="let element" class="id"> {{element.id}} </td>
         </ng-container> 
 
         <!-- settings -->
-        <ng-container cdkDrag matColumnDef="setting">
+        <ng-container matColumnDef="setting">
           <th mat-header-cell *matHeaderCellDef>
             <div class="showCol">
-              <div [class]="ltr?'ltr-setting-image':'setting-image'" [matMenuTriggerFor]="menuCheckbox">
+              <div class="setting-image" [matMenuTriggerFor]="menuCheckbox">
                 <img src="assets/images/settings.png" alt="settings" class="img-fluid">
               </div>
               <mat-menu #menuCheckbox="matMenu" >
+                <p>{{"Schedule"| translate}}</p>
                 <div *ngFor="let head of heads;let i=index" class="check-div">
-                  <mat-checkbox
-                    [checked] ='displayedColumns.includes(head)' 
-                    (change)="colonShowAndHide(head)"
-                    class="d-block px-2"
-                  >
-                  {{head | translate}}
-                </mat-checkbox>  
+                  <div class="d-flex justify-content-between">
+                    <input
+                      type="checkbox" 
+                      id={{head}} 
+                      name={{head}} 
+                      value={{head}}
+                      [checked] ='displayedColumns.includes(head)' 
+                      (change)="colonShowAndHide(head)"
+                      class="d-block"
+                    >
+                    <label for={{head}} class="d-block"> {{head | translate}}</label>
+                  </div>
                 </div>
               </mat-menu>
             </div>
           </th>
-          <td mat-cell *matCellDef="let element" class="d-none"></td>
+          <td mat-cell  *matCellDef="let element">
+            <div class="py-2">
+              <mat-icon mat-icon-button [matMenuTriggerFor]="menu1" aria-label="Example icon-button with a menu">more_vert</mat-icon>
+              <mat-menu #menu1="matMenu">
+                <button mat-menu-item>
+                  <span>Download</span>
+                  <mat-icon>download</mat-icon>
+                </button>  
+                <button mat-menu-item>
+                  <span>Check voice mail</span>
+                </button>  
+                <button mat-menu-item>
+                  <span>Disable alerts</span>
+                </button>  
+              </mat-menu>
+            </div>
+          </td>
         </ng-container>  
   
         <!-- fullName Column -->
-        <ng-container cdkDrag matColumnDef="fullName">
-          <th mat-header-cell mat-sort-header *matHeaderCellDef> {{"fullName" | translate}} </th>
+        <ng-container  matColumnDef="fullName">
+          <th mat-header-cell cdkDrag mat-sort-header *matHeaderCellDef> {{"fullName" | translate}} </th>
           <td 
             mat-cell 
             *matCellDef="let element" 
@@ -73,14 +95,14 @@
         </ng-container>  
           
         <!-- email Column -->
-        <ng-container cdkDrag matColumnDef="email">
-          <th mat-header-cell mat-sort-header *matHeaderCellDef> {{'email' | translate}} </th>
+        <ng-container matColumnDef="email">
+          <th cdkDrag mat-header-cell mat-sort-header *matHeaderCellDef> {{'email' | translate}} </th>
           <td mat-cell *matCellDef="let element" class="email"> {{element.email}} </td>
         </ng-container>  
   
         <!-- daysOfWork Column -->
-        <ng-container cdkDrag matColumnDef="daysOfWork">
-          <th mat-header-cell *matHeaderCellDef>{{"daysOfWork" | translate}}</th>
+        <ng-container matColumnDef="daysOfWork">
+          <th mat-header-cell cdkDrag *matHeaderCellDef>{{"daysOfWork" | translate}}</th>
           <td mat-cell *matCellDef="let element">
             <div class="days">
               <span 
@@ -116,10 +138,10 @@
         </ng-container>  
 
         <!-- files Column -->
-        <ng-container cdkDrag matColumnDef="files">
-          <th mat-header-cell *matHeaderCellDef> {{'files' | translate}} </th>
-          <td mat-cell *matCellDef="let element" colspan="2">
-            <div class="d-flex justify-content-between py-2">
+        <ng-container matColumnDef="files">
+          <th mat-header-cell cdkDrag *matHeaderCellDef> {{'files' | translate}} </th>
+          <td mat-cell *matCellDef="let element">
+            <div class="py-2">
               <div class="files" *ngFor="let file of element.files">
                 <div class="d-flex">
                   <div class="image ms-2">
@@ -129,33 +151,30 @@
                 </div>  
                 <p class="text-end mb-0 size">{{file.size}}</p>
               </div>     
-              <div class="me-3">
-                <mat-icon mat-icon-button [matMenuTriggerFor]="menu1" aria-label="Example icon-button with a menu">more_vert</mat-icon>
-                <mat-menu #menu1="matMenu">
-                  <button mat-menu-item>
-                    <span>Download</span>
-                    <mat-icon>download</mat-icon>
-                  </button>  
-                  <button mat-menu-item>
-                    <span>Check voice mail</span>
-                  </button>  
-                  <button mat-menu-item>
-                    <span>Disable alerts</span>
-                  </button>  
-                </mat-menu>
-              </div>
             </div>  
           </td>
         </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns" cdkDropList  (cdkDropListDropped)="drop($event)"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;" cdkDropList  (cdkDropListDropped)="drop($event)"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        <pagination-controls (pageChange)="currentPage = $event" [maxSize]="5" [directionLinks]="true" [autoHide]="true"></pagination-controls>
         <div class="pagination">
-          <mat-paginator 
+          <!-- <mat-paginator 
             [pageSizeOptions]="[5, 10 ,30]"
             aria-label="Select page of periodic elements">
-          </mat-paginator>
+          </mat-paginator> -->
+          <!-- Pagination Controls -->
+
+<!-- Items per page selection -->
+<mat-form-field>
+  <mat-label>Items per page</mat-label>
+  <mat-select [(ngModel)]="pageSize" (selectionChange)="changePageSize($event)">
+    <mat-option *ngFor="let option of pageSizeOptions" [value]="option">
+      {{ option }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
         </div>
   </div>
 

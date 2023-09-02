@@ -46,7 +46,7 @@ export class DateComponent implements AfterViewInit{
   }
 
   ngAfterViewInit(): void {
-    this.fromDate= "2023-02-28"
+    this.fromDate= "2023-05-28"
     this.getDate(this.fromDate)
   }
 
@@ -68,6 +68,8 @@ export class DateComponent implements AfterViewInit{
     this.lastDay1=new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0).getDate()
     this.lastDay2=new Date(this.date.getFullYear(), this.date.getMonth() + 2, 0).getDate()
     // console.log(this.date.setDate(this.date.getDate()+2).toString() ,this.date);
+    console.log(this.num2,this.num1,this.dayNum,this.date.getDate(),this.lastDay1);
+    
     
   }
 

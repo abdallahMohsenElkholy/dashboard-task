@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -15,7 +15,7 @@ import { ReadingComponent } from './components/reading/reading.component';
 import { TableComponent } from './components/table/table.component';
 import { DateComponent } from './components/date/date.component';
 import { FormsModule } from '@angular/forms';
-
+import { TableDataComponent } from './components/table-data/table-data.component';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -29,7 +29,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     StatisticsComponent,
     ReadingComponent,
     TableComponent,
-    DateComponent
+    DateComponent,
+    TableDataComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +38,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SharedModule,
     FormsModule,
     HttpClientModule,
+    NgxPaginationModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -10,16 +10,20 @@ import {MatSort, MatSortModule} from '@angular/material/sort';
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements AfterViewInit ,OnInit{
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @Input() ltr :boolean = false
+  pageSize = 10; // Number of items to show per page
+  pageSizeOptions = [5, 10, 25, 50]; // Available options for items per page
+  currentPage = 1; // Current page number
   displayedColumns: string[] = ['id', 'fullName', 'email', 'daysOfWork','files','setting'];
   heads: string[] = ['id', 'fullName', 'email', 'daysOfWork','files'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  // @ViewChild(MatSort) sort: MatSort;
+  // @ViewChild(MatPaginator) paginator!: MatPaginator;
   show='show'
   from='from'
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    // this.dataSource.paginator = this.paginator;
     let label=document.querySelector('.mat-mdc-paginator-page-size-label');
     let label2=document.querySelector('.mat-mdc-paginator-range-label');
     let p = document.createElement('p')
@@ -35,7 +39,7 @@ export class TableComponent implements AfterViewInit ,OnInit{
   }
   
   ngOnInit(): void {
-    this.dataSource.sort = this.sort;
+    // this.dataSource.sort = this.sort;
     
   }
 
@@ -50,19 +54,40 @@ export class TableComponent implements AfterViewInit ,OnInit{
 
   colonShowAndHide(colName:string){
     let index ;
+    let i ;
     if (this.displayedColumns.includes(colName)) {
       index = this.displayedColumns.indexOf(colName)
       this.displayedColumns.splice(index,1)
     }else{
+      i = this.displayedColumns.indexOf('setting')
+      this.displayedColumns.splice(i,1)
       index = this.heads.indexOf(colName)
       this.displayedColumns.splice(index,0,colName)
+      this.displayedColumns.push('setting')
     }
   }
 
-  drop(event: any) {
-    // moveItemInArray(this.dataSource, event.previousIndex, event.currentIndex);
-    console.log(event);
+  drop(event: CdkDragDrop<string[]>) {
+    if (!this.ltr) {
+      event.previousIndex=Math.abs(event.previousIndex-this.displayedColumns.length+2)
+      event.currentIndex=Math.abs(event.currentIndex-this.displayedColumns.length+2)
+    }
+    moveItemInArray(this.displayedColumns, event.previousIndex, event.currentIndex);
+    console.log (event.previousIndex, event.currentIndex)
+  }
+
+  getPaginatedData(): any[] {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    return this.dataSource.data.slice(startIndex, endIndex);
+  }
+
+  changePageSize(newPageSize: any) {
+    console.log(this.pageSize);
     
+    this.pageSize = newPageSize.value;
+    this.currentPage = 1; // Reset to the first page when changing page size
+    console.log(this.pageSize);
   }
 
   filter(e:number){

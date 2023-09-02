@@ -107,6 +107,17 @@
 
 
 .responsive-nav{
+    a{text-decoration: none;}
+    .nav-icon{
+        display: none;
+        position: absolute;
+        background-color: #FEEE00;
+        padding-top: 4px;
+        top: 50%;
+        border-radius: 4px;
+        right: 100%;
+        transform: translate(0, -50%);
+    }
     .image{
         height: fit-content;
         padding: 20px;
@@ -119,10 +130,21 @@
     background-color: #fff;
     border: 2px solid rgba(7, 113, 222,.6);
     border-right: 0;
-    width: 350px;
+    width: 220px;
     z-index: 999;
 }
 .ltr-responsive-nav{
+    a{text-decoration: none;}
+    .nav-icon{
+        display: none;
+        position: absolute;
+        background-color: #FEEE00;
+        padding-top: 4px;
+        top: 50%;
+        border-radius: 4px;
+        left: 100%;
+        transform: translate(0, -50%);
+    }
     position: fixed;
     top: 0;
     left: 0;
@@ -130,23 +152,24 @@
     background-color: #fff;
     border: 2px solid rgba(7, 113, 222,.6);
     border-left: 0;
-    width: 350px;
+    width: 220px;
     z-index: 999;
 }
 @media screen and (max-width: 1399px) {
     .side-navigation{
         display: none;
     }
-
+    .ltr-responsive-nav,.responsive-nav{
+        .nav-icon{
+            display: block;
+            cursor: pointer;
+        }
+    }
     .logo{
         display: flex;
         justify-content: space-around;
         align-items: center;
         padding: 0 0 30px 0;
-        .nav-icon{
-            display: block;
-            cursor: pointer;
-        }
         .image{
             margin: 0;
             padding-bottom: 0;
@@ -154,19 +177,19 @@
     }
 }
 
-@media screen and (max-width: 505px) {
-    .responsive-nav ,.ltr-responsive-nav{
-        width: 180px;
-        .image{
-            width: 95px;
-        } 
-    }
-}
-@media screen and (max-width: 355px) {
-    .responsive-nav ,.ltr-responsive-nav{
-        width: 150px;
-        .image{
-            width: 87px;
-        } 
-    }
-}
+// @media screen and (max-width: 505px) {
+//     .responsive-nav ,.ltr-responsive-nav{
+//         width: 180px;
+//         .image{
+//             width: 95px;
+//         } 
+//     }
+// }
+// @media screen and (max-width: 355px) {
+//     .responsive-nav ,.ltr-responsive-nav{
+//         width: 150px;
+//         .image{
+//             width: 87px;
+//         } 
+//     }
+// }
