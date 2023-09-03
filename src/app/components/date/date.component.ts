@@ -46,7 +46,7 @@ export class DateComponent implements AfterViewInit{
   }
 
   ngAfterViewInit(): void {
-    this.fromDate= "2023-05-28"
+    this.fromDate= "2023-03-8"
     this.getDate(this.fromDate)
   }
 

@@ -15,7 +15,6 @@ import { ReadingComponent } from './components/reading/reading.component';
 import { TableComponent } from './components/table/table.component';
 import { DateComponent } from './components/date/date.component';
 import { FormsModule } from '@angular/forms';
-import { TableDataComponent } from './components/table-data/table-data.component';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -30,10 +29,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ReadingComponent,
     TableComponent,
     DateComponent,
-    TableDataComponent
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     BrowserAnimationsModule,
     SharedModule,
     FormsModule,

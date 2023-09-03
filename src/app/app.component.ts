@@ -13,16 +13,22 @@ export class AppComponent {
   }
   title = 'dashboard';
   dir="rtl"
-  ltr=false
+  ltr=false;
+  isOpenedSide: boolean = true;
 
-  switchLanguage(lang: any) {
-    this.translate.use(lang.value);
-    if(lang.value==='ar'){
+  switchLanguage(lang: string) {
+    this.translate.use(lang);
+    if(lang==='ar'){
       this.dir='rtl'
       this.ltr=false
     }else{
       this.dir='ltr'
       this.ltr=true
     }
+    document.body.style.direction = this.dir;
+  }
+
+  onToggleSideNav(evt: boolean) {
+    this.isOpenedSide = evt;
   }
 }

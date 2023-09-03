@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ViewChild, OnInit, Input} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {MatSort, MatSortModule} from '@angular/material/sort';
@@ -12,7 +12,7 @@ import {MatSort, MatSortModule} from '@angular/material/sort';
 export class TableComponent implements AfterViewInit ,OnInit{
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @Input() ltr :boolean = false
-  pageSize = 10; // Number of items to show per page
+  pageSize = 5; // Number of items to show per page
   pageSizeOptions = [5, 10, 25, 50]; // Available options for items per page
   currentPage = 1; // Current page number
   displayedColumns: string[] = ['id', 'fullName', 'email', 'daysOfWork','files','setting'];
@@ -23,7 +23,7 @@ export class TableComponent implements AfterViewInit ,OnInit{
   show='show'
   from='from'
   ngAfterViewInit() {
-    // this.dataSource.paginator = this.paginator;
+    this.dataSource.paginator = this.paginator;
     let label=document.querySelector('.mat-mdc-paginator-page-size-label');
     let label2=document.querySelector('.mat-mdc-paginator-range-label');
     let p = document.createElement('p')
@@ -50,6 +50,28 @@ export class TableComponent implements AfterViewInit ,OnInit{
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  getDisplayedPageNumbers(): number[] {
+    const pageCount = Math.ceil(21 / this.pageSize);
+    const currentPageIndex = this.currentPage + 1;
+    const displayedPageNumbers = [];
+
+    if (pageCount <= 5) {
+      for (let i = 1; i <= pageCount; i++) {
+        displayedPageNumbers.push(i);
+      }
+    } else {
+      if (currentPageIndex <= 3) {
+        displayedPageNumbers.push(1, 2, 3, 4, 5);
+      } else if (currentPageIndex >= pageCount - 2) {
+        displayedPageNumbers.push(pageCount - 4, pageCount - 3, pageCount - 2, pageCount - 1, pageCount);
+      } else {
+        displayedPageNumbers.push(currentPageIndex - 2, currentPageIndex - 1, currentPageIndex, currentPageIndex + 1, currentPageIndex + 2);
+      }
+    }
+
+    return displayedPageNumbers;
   }
 
   colonShowAndHide(colName:string){
@@ -82,16 +104,14 @@ export class TableComponent implements AfterViewInit ,OnInit{
     return this.dataSource.data.slice(startIndex, endIndex);
   }
 
-  changePageSize(newPageSize: any) {
-    console.log(this.pageSize);
-    
-    this.pageSize = newPageSize.value;
-    this.currentPage = 1; // Reset to the first page when changing page size
-    console.log(this.pageSize);
+  changePageSize(newPageSize: any) {    
+    this.currentPage = 1;
+    this.paginator.pageSize = newPageSize.value;
+    this.dataSource.data = [...this.dataSource.data]
   }
 
   filter(e:number){
-    ELEMENT_DATA.sort((a:any,b:any)=>{
+    this.dataSource.data.sort((a:any,b:any)=>{
       let nameA
       let nameB
       if (e===1) {
@@ -114,9 +134,31 @@ export class TableComponent implements AfterViewInit ,OnInit{
     this.ngOnInit()
   }
 
-  pageChanged(e:any){
-    console.log(e);
-    
+  onPageChange(event: PageEvent) {
+    this.currentPage = event.pageIndex;
+    this.pageSize = event.pageSize;
+  }
+
+  changePage(pageNum: number) {
+    this.currentPage = pageNum;
+    this.paginator.pageIndex = pageNum;
+    this.dataSource.data = [...this.dataSource.data]
+  }
+
+  goNext() {
+    if(this.currentPage !== this.getDisplayedPageNumbers().length - 1) {
+      this.currentPage = this.currentPage + 1;
+      this.paginator.pageIndex = this.currentPage;
+      this.dataSource.data = [...this.dataSource.data]
+    }
+  }
+
+  goPrev() {
+    if(this.currentPage !== 0) {
+      this.currentPage = this.currentPage - 1;
+      this.paginator.pageIndex = this.currentPage;
+      this.dataSource.data = [...this.dataSource.data]
+    }
   }
 }
 
@@ -136,6 +178,10 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {id: 'ID-457768', fullName: 'سيب إفتراضي جديد مثال ', daysOfWork: [0,1,4], email: 'Example@company.com' ,files:[{size:"9mb . PDF",fileName:"واجهة المستخدم .png"}]},
   {id: 'ID-16756747', fullName: 'إسم إفتراضي جديد مثال ', daysOfWork: [0,1,4], email: 'QExample@company.com' ,files:[{img:'assets/images/file.png',size:"9mb . PDF",fileName:"واجهة المستخدم .png"}]},
   {id: 'ID-264264', fullName: 'قا إفتراضي جديد مثال ', daysOfWork:[2,1,6], email: 'Example@company.com' ,files:[{size:"9mb . PDF",fileName:"واجهة المستخدم .png"}]},
+  {id: 'ID-64656', fullName: 'إساايم إفتراضي جديد مثال ', daysOfWork: [2,1,6], email: 'Example@company.com' ,files:[{img:'assets/images/file.png',size:"9mb . PDF",fileName:"واجهة المستخدم .png"}]},
+  {id: 'ID-26546', fullName: 'فغف إفتراضي جديد مثال ', daysOfWork:[2,1,6], email: 'Example@company.com' ,files:[{img:'assets/images/file.png',size:"9mb . PDF",fileName:"واجهة المستخدم .png"}]},
+  {id: 'ID-644634', fullName: 'إسم إفتراضي جديد مثال ', daysOfWork: [2,1,6], email: 'Example@company.com' ,files:[{size:"9mb . PDF",fileName:"واجهة المستخدم .png"}]},
+  {id: 'ID-3636', fullName: 'اب إفتراضي جديد مثال ', daysOfWork: [2,1,4], email: 'QExample@company.com' ,files:[{img:'assets/images/file.png',size:"9mb . PDF",fileName:"واجهة المستخدم .png"}]},
   {id: 'ID-64656', fullName: 'إساايم إفتراضي جديد مثال ', daysOfWork: [2,1,6], email: 'Example@company.com' ,files:[{img:'assets/images/file.png',size:"9mb . PDF",fileName:"واجهة المستخدم .png"}]},
   {id: 'ID-26546', fullName: 'فغف إفتراضي جديد مثال ', daysOfWork:[2,1,6], email: 'Example@company.com' ,files:[{img:'assets/images/file.png',size:"9mb . PDF",fileName:"واجهة المستخدم .png"}]},
   {id: 'ID-644634', fullName: 'إسم إفتراضي جديد مثال ', daysOfWork: [2,1,6], email: 'Example@company.com' ,files:[{size:"9mb . PDF",fileName:"واجهة المستخدم .png"}]},

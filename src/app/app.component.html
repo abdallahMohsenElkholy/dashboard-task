@@ -1,13 +1,15 @@
-<div class="pt-3 container" [style.direction]="dir">
-  <div class="row">
-    <div class="col-xxl-2">
-      <select class="" (change)="switchLanguage($event.target)">
-        <option value="en">{{'English' |translate}}</option>
-        <option selected value="ar">{{'Arabic' |translate}}</option>
-      </select>
-      <app-navigation [ltr]="ltr"/>
+<div class="pt-3 container-fluid" [style.direction]="dir">
+ <div class="lang w-100 d-flex justify-content-end mb-4">
+  <div (click)="switchLanguage(ltr ? 'ar' : 'en')" class="lang-button d-flex justify-content-center align-items-center">
+    <span>{{ltr ? 'العربية' : 'English'}}</span>
+    <mat-icon class="mx-2">public</mat-icon>
+  </div>
+ </div>
+  <div class="row px-0 px-lg-3">
+    <div [ngClass]="{'col-xxl-2': isOpenedSide, 'col-xxl-12': !isOpenedSide}">
+      <app-navigation (isSideOpenedEvt)="onToggleSideNav($event)" [ltr]="ltr"/>
     </div>
-    <div class="m-60 col-xxl-10 pt-lg-3 px-lg-0">
+    <div [ngClass]="{'col-xxl-10': isOpenedSide, 'col-xxl-12': !isOpenedSide}" class="pt-lg-3 px-lg-0">
       <div class="row">
         <div class="col-xxl-8">
           <div>

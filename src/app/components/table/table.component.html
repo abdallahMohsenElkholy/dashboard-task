@@ -1,181 +1,180 @@
-<div class="users-table">
-  <div class="table">
+<div class="users-table mt-3">
+  <div [class]="ltr?'ltr-table':'table'">
     <div class="row">
-        <div class="col-sm-6 mb-sm-0 mb-3 d-flex justify-content-around" [class]="ltr? 'pe-0' :'ps-0'">
-          <form class="p-0 w-75">
-            <input type="search" #input (keyup)="applyFilter($event)" class="form-control" [placeholder]="'search.plh'|translate" >
-          </form>
-          <div class="filter d-flex justify-content-around" [class]="ltr? 'justify-content-sm-end' :'justify-content-sm-start'">
-            <div (click)="filter(1)"
-              matTooltip='{{"filter"|translate}} id'
-              matTooltipPosition="above"
-            >
-              <mat-icon> filter_list</mat-icon>
-            </div>
-            <div (click)="filter(2)"
-              matTooltip='{{"filter"|translate}} {{"fullName" | translate}}'
-              matTooltipPosition="above"
-            >
-              <mat-icon> swap_vert</mat-icon>
-            </div>
+      <div class="col-sm-6 mb-sm-0 mb-3 d-flex justify-content-around" [class]="ltr? 'pe-0' :'ps-0'">
+        <form class="p-0 w-75">
+          <input type="search" #input (keyup)="applyFilter($event)" class="form-control"
+            [placeholder]="'search.plh'|translate">
+          <div class="position-absolute">
+            <mat-icon class="position-absolute">search</mat-icon>
+          </div>
+        </form>
+        <div class="filter d-flex justify-content-start"
+          [class]="ltr? 'justify-content-sm-end' :'justify-content-sm-start'">
+          <div (click)="filter(1)" matTooltip='{{"filter"|translate}} id' matTooltipPosition="above">
+            <mat-icon> filter_list</mat-icon>
+          </div>
+          <div (click)="filter(2)" matTooltip='{{"filter"|translate}} {{"fullName" | translate}}'
+            matTooltipPosition="above">
+            <mat-icon> swap_vert</mat-icon>
           </div>
         </div>
-        <div class="col-sm-6 d-flex align-items-center justify-content-sm-end justify-content-center ">
-            <button data-toggle="modal" data-target="#addRow" class="add-btn">{{'add.new'|translate}}</button>
-        </div>
+      </div>
+      <div class="col-sm-6 d-flex align-items-center justify-content-sm-end justify-content-center ">
+        <button data-toggle="modal" data-target="#addRow" class="add-btn">{{'add.new'|translate}}</button>
+      </div>
     </div>
   </div>
-  <div class="mat-elevation-z8 example-container my-3">  
-    
+  <div class="mat-elevation-z8 example-container my-3">
 
-    
-    <table mat-table [dataSource]="dataSource" matSort cdkDropListOrientation="horizontal" cdkDropList (cdkDropListDropped)="drop($event)">
-        <!-- id Column -->
-        <ng-container matColumnDef="id">
-          <th mat-header-cell cdkDrag mat-sort-header *matHeaderCellDef>{{'id' | translate}}</th>
-          <td mat-cell *matCellDef="let element" class="id"> {{element.id}} </td>
-        </ng-container> 
 
-        <!-- settings -->
-        <ng-container matColumnDef="setting">
-          <th mat-header-cell *matHeaderCellDef>
-            <div class="showCol">
-              <div class="setting-image" [matMenuTriggerFor]="menuCheckbox">
-                <img src="assets/images/settings.png" alt="settings" class="img-fluid">
-              </div>
-              <mat-menu #menuCheckbox="matMenu" >
-                <p>{{"Schedule"| translate}}</p>
-                <div *ngFor="let head of heads;let i=index" class="check-div">
-                  <div class="d-flex justify-content-between">
-                    <input
-                      type="checkbox" 
-                      id={{head}} 
-                      name={{head}} 
-                      value={{head}}
-                      [checked] ='displayedColumns.includes(head)' 
-                      (change)="colonShowAndHide(head)"
-                      class="d-block"
-                    >
-                    <label for={{head}} class="d-block"> {{head | translate}}</label>
-                  </div>
+
+    <table mat-table [dataSource]="dataSource" matSort cdkDropListOrientation="horizontal" cdkDropList
+      (cdkDropListDropped)="drop($event)">
+      <!-- id Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell cdkDrag mat-sort-header *matHeaderCellDef>{{'id' | translate}}</th>
+        <td mat-cell *matCellDef="let element" class="id"> {{element.id}} </td>
+      </ng-container>
+
+      <!-- settings -->
+      <ng-container matColumnDef="setting">
+        <th mat-header-cell *matHeaderCellDef>
+          <div class="showCol">
+            <div class="setting-image" [matMenuTriggerFor]="menuCheckbox">
+              <img src="assets/images/settings.png" alt="settings" class="img-fluid">
+            </div>
+            <mat-menu #menuCheckbox="matMenu">
+              <p>{{"Schedule"| translate}}</p>
+              <div *ngFor="let head of heads;let i=index" class="check-div">
+                <div class="d-flex justify-content-between">
+                  <input type="checkbox" id={{head}} name={{head}} value={{head}}
+                    [checked]='displayedColumns.includes(head)' (change)="colonShowAndHide(head)" class="d-block">
+                  <label for={{head}} class="d-block"> {{head | translate}}</label>
                 </div>
-              </mat-menu>
+              </div>
+            </mat-menu>
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <div class="py-2">
+            <mat-icon mat-icon-button [matMenuTriggerFor]="menu1"
+              aria-label="Example icon-button with a menu">more_vert</mat-icon>
+            <mat-menu #menu1="matMenu">
+              <button mat-menu-item>
+                <span>Download</span>
+                <mat-icon>download</mat-icon>
+              </button>
+              <button mat-menu-item>
+                <span>Check voice mail</span>
+              </button>
+              <button mat-menu-item>
+                <span>Disable alerts</span>
+              </button>
+            </mat-menu>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- fullName Column -->
+      <ng-container matColumnDef="fullName">
+        <th mat-header-cell cdkDrag mat-sort-header *matHeaderCellDef> {{"fullName" | translate}} </th>
+        <td mat-cell *matCellDef="let element" class="fullName" [matTooltip]='element.fullName'
+          matTooltipPosition="above" matTooltipClass="example-tooltip"> {{element.fullName |cutNum}} </td>
+      </ng-container>
+
+      <!-- email Column -->
+      <ng-container matColumnDef="email">
+        <th cdkDrag mat-header-cell mat-sort-header *matHeaderCellDef> {{'email' | translate}} </th>
+        <td mat-cell *matCellDef="let element" class="email"> {{element.email}} </td>
+      </ng-container>
+
+      <!-- daysOfWork Column -->
+      <ng-container matColumnDef="daysOfWork">
+        <th mat-header-cell cdkDrag *matHeaderCellDef>{{"daysOfWork" | translate}}</th>
+        <td mat-cell *matCellDef="let element">
+          <div class="days">
+            <span [class]="element.daysOfWork.includes(0)?'active-day':'not-active-day'">
+              {{'Sat' | translate}}
+            </span>
+            <span [class]="element.daysOfWork.includes(1)?'active-day':'not-active-day'">
+              {{'Sun' | translate}}
+            </span>
+            <span [class]="element.daysOfWork.includes(2)?'active-day':'not-active-day'">
+              {{'Mon' | translate}}
+            </span>
+            <span [class]="element.daysOfWork.includes(3)?'active-day':'not-active-day'">
+              {{'Tue' | translate}}
+            </span>
+            <span [class]="element.daysOfWork.includes(4)?'active-day':'not-active-day'">
+              {{'Wed' | translate}}
+            </span>
+            <span [class]="element.daysOfWork.includes(5)?'active-day':'not-active-day'">
+              {{'Thu' | translate}}
+            </span>
+            <span [class]="element.daysOfWork.includes(6)?'active-day':'not-active-day'">
+              {{'Fri' | translate}}
+            </span>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- files Column -->
+      <ng-container matColumnDef="files">
+        <th mat-header-cell cdkDrag *matHeaderCellDef> {{'files' | translate}} </th>
+        <td mat-cell *matCellDef="let element">
+          <div class="py-2">
+            <div class="files" *ngFor="let file of element.files">
+              <div class="d-flex">
+                <div class="image ms-2">
+                  <img [src]="file.img? file.img: 'assets/images/fileImgPl.png'" class="img-fluid" alt="file image">
+                </div>
+                <p class="name">{{file.fileName}}</p>
+              </div>
+              <p class="text-end mb-0 size">{{file.size}}</p>
             </div>
-          </th>
-          <td mat-cell  *matCellDef="let element">
-            <div class="py-2">
-              <mat-icon mat-icon-button [matMenuTriggerFor]="menu1" aria-label="Example icon-button with a menu">more_vert</mat-icon>
-              <mat-menu #menu1="matMenu">
-                <button mat-menu-item>
-                  <span>Download</span>
-                  <mat-icon>download</mat-icon>
-                </button>  
-                <button mat-menu-item>
-                  <span>Check voice mail</span>
-                </button>  
-                <button mat-menu-item>
-                  <span>Disable alerts</span>
-                </button>  
-              </mat-menu>
-            </div>
-          </td>
-        </ng-container>  
-  
-        <!-- fullName Column -->
-        <ng-container  matColumnDef="fullName">
-          <th mat-header-cell cdkDrag mat-sort-header *matHeaderCellDef> {{"fullName" | translate}} </th>
-          <td 
-            mat-cell 
-            *matCellDef="let element" 
-            class="fullName"
-            [matTooltip]='element.fullName'
-            matTooltipPosition="above"
-            matTooltipClass="example-tooltip"
-          > {{element.fullName |cutNum}} </td>
-        </ng-container>  
-          
-        <!-- email Column -->
-        <ng-container matColumnDef="email">
-          <th cdkDrag mat-header-cell mat-sort-header *matHeaderCellDef> {{'email' | translate}} </th>
-          <td mat-cell *matCellDef="let element" class="email"> {{element.email}} </td>
-        </ng-container>  
-  
-        <!-- daysOfWork Column -->
-        <ng-container matColumnDef="daysOfWork">
-          <th mat-header-cell cdkDrag *matHeaderCellDef>{{"daysOfWork" | translate}}</th>
-          <td mat-cell *matCellDef="let element">
-            <div class="days">
-              <span 
-                [class]="element.daysOfWork.includes(0)?'active-day':'not-active-day'">
-                {{'Sat' | translate}}
-              </span>  
-              <span 
-                [class]="element.daysOfWork.includes(1)?'active-day':'not-active-day'">
-                {{'Sun' | translate}}
-              </span>  
-              <span 
-                [class]="element.daysOfWork.includes(2)?'active-day':'not-active-day'">
-                {{'Mon' | translate}}
-              </span>  
-              <span 
-                [class]="element.daysOfWork.includes(3)?'active-day':'not-active-day'">
-                {{'Tue' | translate}}
-              </span>  
-              <span 
-                [class]="element.daysOfWork.includes(4)?'active-day':'not-active-day'">
-                {{'Wed' | translate}}
-              </span>  
-              <span 
-                [class]="element.daysOfWork.includes(5)?'active-day':'not-active-day'">
-                {{'Thu' | translate}}
-              </span>  
-              <span 
-                [class]="element.daysOfWork.includes(6)?'active-day':'not-active-day'">
-                {{'Fri' | translate}}
-              </span>  
-            </div>  
-          </td>  
-        </ng-container>  
+          </div>
+        </td>
+      </ng-container>
 
-        <!-- files Column -->
-        <ng-container matColumnDef="files">
-          <th mat-header-cell cdkDrag *matHeaderCellDef> {{'files' | translate}} </th>
-          <td mat-cell *matCellDef="let element">
-            <div class="py-2">
-              <div class="files" *ngFor="let file of element.files">
-                <div class="d-flex">
-                  <div class="image ms-2">
-                    <img [src]="file.img? file.img: 'assets/images/fileImgPl.png'" class="img-fluid" alt="file image">
-                  </div>  
-                  <p class="name">{{file.fileName}}</p>
-                </div>  
-                <p class="text-end mb-0 size">{{file.size}}</p>
-              </div>     
-            </div>  
-          </td>
-        </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-        <pagination-controls (pageChange)="currentPage = $event" [maxSize]="5" [directionLinks]="true" [autoHide]="true"></pagination-controls>
-        <div class="pagination">
-          <!-- <mat-paginator 
-            [pageSizeOptions]="[5, 10 ,30]"
-            aria-label="Select page of periodic elements">
-          </mat-paginator> -->
-          <!-- Pagination Controls -->
-
-<!-- Items per page selection -->
-<mat-form-field>
-  <mat-label>Items per page</mat-label>
-  <mat-select [(ngModel)]="pageSize" (selectionChange)="changePageSize($event)">
-    <mat-option *ngFor="let option of pageSizeOptions" [value]="option">
-      {{ option }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-        </div>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <!-- <pagination-controls (pageChange)="currentPage = $event" [maxSize]="5" [directionLinks]="true"
+      [autoHide]="true"></pagination-controls> -->
   </div>
-
+  <div class="pagination d-flex justify-content-between align-items-center flex-wrap mb-3">
+    <div class="page-numbers d-flex align-items-center">
+      <svg (click)="goPrev()" [ngClass]="{'opacity-50': currentPage == 0}" width="20" height="20" viewBox="0 0 15 15"
+        fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.3166 3.96765L4.89623 7.38225L8.3166 10.7968" stroke="#7E8299" stroke-width="1.15358"
+          stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <span class="mx-2 d-none d-sm-flex" (click)="changePage(pageNumber - 1)"
+        *ngFor="let pageNumber of getDisplayedPageNumbers()" [class.active]="pageNumber === (currentPage + 1)">
+        {{ pageNumber }}
+      </span>
+      <svg (click)="goNext()" [ngClass]="{'opacity-50': currentPage == getDisplayedPageNumbers().length - 1}"
+        class="rotate-180" width="20" height="20" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.3166 3.96765L4.89623 7.38225L8.3166 10.7968" stroke="#7E8299" stroke-width="1.15358"
+          stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+    <div class="paginator-size-container">
+      <span>{{'show' | translate}}</span>
+      <mat-form-field class="paginator-size mb-0 mx-2">
+        <mat-select [(ngModel)]="pageSize" (selectionChange)="changePageSize($event)">
+          <mat-option *ngFor="let option of pageSizeOptions" [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <span>{{'from' | translate}}</span>
+      <span class="mx-2 fw-bold">{{dataSource.data.length}}</span>
+    </div>
+  </div>
 </div>
+
+
+<mat-paginator style="display: none;" [length]="dataSource?.data?.length" [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)"></mat-paginator>

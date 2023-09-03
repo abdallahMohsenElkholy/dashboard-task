@@ -1,15 +1,14 @@
+
+$wOne:16.5%;
+$wTwo:255px;
+
 .logo{
     display: flex;
-    .nav-icon{
-        display: none;
-    }
-    .image{
-        width: 145px;
-        padding: 0 0 60px;
-        margin: 0 auto;
-    }
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 0 30px 0;
+    padding-bottom: 50px;
     border-bottom: 1px solid #F4F7FE;
-
 }
 
 .side-navigation,.res-side-navigation{
@@ -31,6 +30,7 @@
         padding: 0;
         >li >a {
             display: flex;
+            text-decoration: none;
             cursor: pointer;
             .text{
                 padding: 20px;
@@ -101,22 +101,35 @@
                 border-bottom: 3px solid #2E2E2E;
                 background-color: #FEEE00;
             }
+            .mat-icon{
+                color: red !important;
+            }
         }
     }
 }
 
 
 .responsive-nav{
-    a{text-decoration: none;}
     .nav-icon{
-        display: none;
+        cursor:pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
         position: absolute;
         background-color: #FEEE00;
-        padding-top: 4px;
-        top: 50%;
-        border-radius: 4px;
+        top: 13%;
+        border-radius: 50%;
         right: 100%;
         transform: translate(0, -50%);
+        cursor: pointer;
+        mat-icon {
+            font-size: 20px;
+            color: #2E2E2E;
+            width: unset;
+            height: unset;
+        }
     }
     .image{
         height: fit-content;
@@ -125,56 +138,46 @@
     }
     position: fixed;
     top: 0;
-    right: 0;
     bottom: 0;
     background-color: #fff;
-    border: 2px solid rgba(7, 113, 222,.6);
     border-right: 0;
-    width: 220px;
+    width: $wOne;
     z-index: 999;
 }
 .ltr-responsive-nav{
-    a{text-decoration: none;}
     .nav-icon{
-        display: none;
+        cursor:pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
         position: absolute;
         background-color: #FEEE00;
-        padding-top: 4px;
-        top: 50%;
-        border-radius: 4px;
+        top: 13%;
+        border-radius: 50%;
         left: 100%;
         transform: translate(0, -50%);
+        cursor: pointer;
+        mat-icon {
+            font-size: 20px;
+            color: #2E2E2E;
+            width: unset;
+            height: unset;
+        }
+    }
+    .image{
+        height: fit-content;
+        padding: 20px;
+        border-radius:0 50% 50% 0;
     }
     position: fixed;
     top: 0;
-    left: 0;
     bottom: 0;
     background-color: #fff;
-    border: 2px solid rgba(7, 113, 222,.6);
     border-left: 0;
-    width: 220px;
+    width: $wOne;
     z-index: 999;
-}
-@media screen and (max-width: 1399px) {
-    .side-navigation{
-        display: none;
-    }
-    .ltr-responsive-nav,.responsive-nav{
-        .nav-icon{
-            display: block;
-            cursor: pointer;
-        }
-    }
-    .logo{
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        padding: 0 0 30px 0;
-        .image{
-            margin: 0;
-            padding-bottom: 0;
-        }
-    }
 }
 
 // @media screen and (max-width: 505px) {
@@ -193,3 +196,114 @@
 //         } 
 //     }
 // }
+
+
+.openAr {
+    animation: openAr .6s ease forwards;
+}
+
+.closeAr {
+    animation: closeAr .6s ease forwards;
+}
+
+.openEn {
+    animation: openEn .6s ease forwards;
+}
+
+.closeEn {
+    animation: closeEn .6s ease forwards;
+}
+
+@keyframes closeAr {
+    from{
+        right: 0;
+    }
+    to {
+        right: -$wOne;
+    }
+}
+
+@keyframes openAr {
+    from{
+        right: -$wOne;
+    }
+    to {
+        right: 0;
+    }
+}
+
+@keyframes closeEn {
+    from{
+        left: 0;
+    }
+    to {
+        left: -$wOne;
+    }
+}
+
+@keyframes openEn {
+    from{
+        left: -$wOne;
+    }
+    to {
+        left: 0;
+    }
+}
+
+@media screen and (max-width: 1399px) {
+    .ltr-responsive-nav,.responsive-nav{
+        width: $wTwo;
+    }
+
+    .openAr {
+        animation: openAr2 .6s ease forwards;
+    }
+    
+    .closeAr {
+        animation: closeAr2 .6s ease forwards;
+    }
+    
+    .openEn {
+        animation: openEn2 .6s ease forwards;
+    }
+    
+    .closeEn {
+        animation: closeEn2 .6s ease forwards;
+    }
+}
+
+@keyframes closeAr2 {
+    from{
+        right: 0;
+    }
+    to {
+        right: -$wTwo;
+    }
+}
+
+@keyframes openAr2 {
+    from{
+        right: -$wTwo;
+    }
+    to {
+        right: 0;
+    }
+}
+
+@keyframes closeEn2 {
+    from{
+        left: 0;
+    }
+    to {
+        left: -$wTwo;
+    }
+}
+
+@keyframes openEn2 {
+    from{
+        left: -$wTwo;
+    }
+    to {
+        left: 0;
+    }
+}

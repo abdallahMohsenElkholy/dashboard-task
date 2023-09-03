@@ -1,17 +1,13 @@
-<div class="logo d-flex">
-    <div class="image" [class]="resNav?'opacity-0':''">
-        <img src="assets/images/logo.png" alt="logo" class="img-fluid">
-    </div>
-</div>
-<div [@openClose]="isOpen ? 'open' : 'closed'" class=" d-flex flex-column" [class]="ltr?'ltr-responsive-nav':'responsive-nav'">
-    <div class="nav-icon" (click)="isOpen=!isOpen">
-        <mat-icon>menu</mat-icon>
+<div [ngClass]="{'openAr': isOpen && !ltr, 'openEn': isOpen && ltr, 'closeAr': !isOpen && !ltr, 'closeEn': !isOpen && ltr}" 
+    class="shadow-lg" class=" d-flex flex-column" [class]="ltr?'ltr-responsive-nav':'responsive-nav'">
+    <div class="nav-icon" (click)="toggleSideNav()">
+        <mat-icon *ngIf="!ltr">keyboard_arrow_{{!isOpen ? 'left' : 'right'}}</mat-icon>
+        <mat-icon *ngIf="ltr">keyboard_arrow_{{!isOpen ? 'right':'left'}}</mat-icon>
     </div> 
-    <div class="d-flex justify-content-between flex-wrap p-2 ">
+    <div class="d-flex justify-content-between flex-wrap p-2 logo">
         <div class="image">
             <img src="assets/images/logo.png" alt="logo" class="img-fluid">
         </div>
-
     </div>
     
     <div [class]="ltr?'ltr-res-side-navigation':'res-side-navigation'">
@@ -51,7 +47,7 @@
                     </div>
                     <div class="dropdown-btn" aria-haspopup="menu">
                         <span class="link">{{'menu-2' | translate}}</span>
-                        <mat-icon class="pt-2 mx-2 fs-5">{{arrow2}}</mat-icon>
+                        <mat-icon class="pt-2 me-2 fs-5">{{arrow2}}</mat-icon>
                         <ul class="dropdown-content list-unstyled" *ngIf="activeLink=='menu-2'&&open" role="menu">
                             <li><a class="mimi-link" (click)="getActive('menu-2','close2')">{{'mini-menu' | translate}}</a></li>
                             <li><a class="mimi-link" (click)="getActive('menu-2','close2')">{{'mini-menu' | translate}}</a></li>
@@ -102,92 +98,4 @@
             </li>
         </ul>
     </div>
-</div>
-<div class="side-navigation">
-    <h5>{{activeLink | translate}}</h5>
-    <ul class="list-unstyled">
-        <li>
-            <a (click)="getActive('home')">
-                <div class="image" [class.active]="activeLink=='home'">
-                    <img src="assets/images/li.png" alt="icon" class="img-fluid">
-                </div>
-                <div class="text link">
-                    {{'home' | translate}}
-                </div>
-            </a>
-        </li>
-        <li class="dropdown">
-            <a (click)="getActive('menu-1','toggle')">
-                <div class="image" [class.active]="activeLink=='menu-1'">
-                    <img src="assets/images/li.png" alt="icon" class="img-fluid">
-                </div>
-                <div class="dropdown-btn" aria-haspopup="menu">
-                    <span class="link">{{'menu-1' | translate}}</span>
-                    <mat-icon class="pt-2 mx-2 fs-5">{{arrow}}</mat-icon>
-                    <ul class="dropdown-content list-unstyled" *ngIf="activeLink=='menu-1'&&open" role="menu">
-                        <li><a class="mimi-link" (click)="getActive('menu-1','close')">{{'mini-menu' | translate}}</a></li>
-                        <li><a class="mimi-link" (click)="getActive('menu-1','close')">{{'mini-menu' | translate}}</a></li>
-                        <li><a class="mimi-link" (click)="getActive('menu-1','close')">{{'mini-menu' | translate}}</a></li>
-                        <li><a class="mimi-link" (click)="getActive('menu-1','close')">{{'mini-menu' | translate}}</a></li>
-                    </ul>
-                </div>
-            </a>
-        </li>
-        <li class="dropdown">
-            <a (click)="getActive('menu-2','toggle')">
-                <div class="image" [class.active]="activeLink=='menu-2'">
-                    <img src="assets/images/li.png" alt="icon" class="img-fluid">
-                </div>
-                <div class="dropdown-btn" aria-haspopup="menu">
-                    <span class="link">{{'menu-2' | translate}}</span>
-                    <mat-icon class="pt-2 mx-2 fs-5">{{arrow2}}</mat-icon>
-                    <ul class="dropdown-content list-unstyled" *ngIf="activeLink=='menu-2'&&open" role="menu">
-                        <li><a class="mimi-link" (click)="getActive('menu-2','close2')">{{'mini-menu' | translate}}</a></li>
-                        <li><a class="mimi-link" (click)="getActive('menu-2','close2')">{{'mini-menu' | translate}}</a></li>
-                        <li><a class="mimi-link" (click)="getActive('menu-2','close2')">{{'mini-menu' | translate}}</a></li>
-                        <li><a class="mimi-link" (click)="getActive('menu-2','close2')">{{'mini-menu' | translate}}</a></li>
-                    </ul>
-                </div>
-            </a>
-        </li>
-        <li>
-            <a (click)="getActive('menu-3')">
-                <div class="image" [class.active]="activeLink=='menu-3'">
-                    <img src="assets/images/li.png" alt="icon" class="img-fluid">
-                </div>
-                <div class="text link">
-                    {{'menu-3' | translate}}
-                </div>
-            </a>
-        </li>
-        <li>
-            <a (click)="getActive('menu-4')">
-                <div class="image" [class.active]="activeLink=='menu-4'">
-                    <img src="assets/images/li.png" alt="icon" class="img-fluid">
-                </div >
-                <div class="text link">
-                    {{'menu-4' | translate}}
-                </div>
-            </a>
-        </li>
-    </ul>
-    <h5>{{'account' | translate}}</h5>
-    <ul class="account list-unstyled">
-        <li>
-            <a>
-                <div class="image">
-                    <img src="assets/images/info-circle.png" alt="" class="img-fluid">
-                </div>
-                <p class="my-3 pt-1 link">{{'help' | translate}}</p>
-            </a>
-        </li>
-        <li>
-            <a>
-                <div class="image">
-                    <img src="assets/images/setting-2.png" alt="" class="img-fluid">
-                </div>
-                <p class="my-3 pt-1 link">{{'setting' | translate}}</p>
-            </a>
-        </li>
-    </ul>
 </div>
