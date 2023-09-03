@@ -10,6 +10,8 @@ import {MatSort, MatSortModule} from '@angular/material/sort';
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements AfterViewInit ,OnInit{
+
+  days=['Sat','Sun','Mon','Tue','Wed','Thu','Fri']
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @Input() ltr :boolean = false
   pageSize = 5; // Number of items to show per page
@@ -18,8 +20,8 @@ export class TableComponent implements AfterViewInit ,OnInit{
   displayedColumns: string[] = ['id', 'fullName', 'email', 'daysOfWork','files','setting'];
   heads: string[] = ['id', 'fullName', 'email', 'daysOfWork','files'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  // @ViewChild(MatSort) sort: MatSort;
-  // @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
   show='show'
   from='from'
   ngAfterViewInit() {
@@ -53,7 +55,7 @@ export class TableComponent implements AfterViewInit ,OnInit{
   }
 
   getDisplayedPageNumbers(): number[] {
-    const pageCount = Math.ceil(21 / this.pageSize);
+    const pageCount = Math.ceil(this.dataSource.data.length / this.pageSize);
     const currentPageIndex = this.currentPage + 1;
     const displayedPageNumbers = [];
 
@@ -105,7 +107,7 @@ export class TableComponent implements AfterViewInit ,OnInit{
   }
 
   changePageSize(newPageSize: any) {    
-    this.currentPage = 1;
+    this.currentPage = 0;
     this.paginator.pageSize = newPageSize.value;
     this.dataSource.data = [...this.dataSource.data]
   }
@@ -132,11 +134,6 @@ export class TableComponent implements AfterViewInit ,OnInit{
       return 0; 
     })
     this.ngOnInit()
-  }
-
-  onPageChange(event: PageEvent) {
-    this.currentPage = event.pageIndex;
-    this.pageSize = event.pageSize;
   }
 
   changePage(pageNum: number) {

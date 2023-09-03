@@ -10,6 +10,23 @@ table {
   }
 }
 
+.schedule{
+  margin-inline-start: 40px;
+  color: #2E2E2E;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.check-div{
+  color: #2E2E2E;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-bottom: 0.6px solid #E1E6EE;
+  input{
+    width: 18px;
+  }
+}
+
 .table{
   form{
     border-radius: 8px !important;

@@ -18,7 +18,7 @@
                     <div class="image" [class.active]="activeLink=='home'">
                         <img src="assets/images/li.png" alt="icon" class="img-fluid">
                     </div>
-                    <div class="text link">
+                    <div class="text link w-100">
                         {{'home' | translate}}
                     </div>
                 </a>
@@ -28,7 +28,7 @@
                     <div class="image" [class.active]="activeLink=='menu-1'">
                         <img src="assets/images/li.png" alt="icon" class="img-fluid">
                     </div>
-                    <div class="dropdown-btn" aria-haspopup="menu">
+                    <div class="dropdown-btn w-100" aria-haspopup="menu">
                         <span class="link">{{'menu-1' | translate}}</span>
                         <mat-icon class="pt-2 mx-2 fs-5">{{arrow}}</mat-icon>
                         <ul class="dropdown-content list-unstyled" *ngIf="activeLink=='menu-1'&&open" role="menu">
@@ -45,9 +45,9 @@
                     <div class="image" [class.active]="activeLink=='menu-2'">
                         <img src="assets/images/li.png" alt="icon" class="img-fluid">
                     </div>
-                    <div class="dropdown-btn" aria-haspopup="menu">
+                    <div class="dropdown-btn w-100" aria-haspopup="menu">
                         <span class="link">{{'menu-2' | translate}}</span>
-                        <mat-icon class="pt-2 me-2 fs-5">{{arrow2}}</mat-icon>
+                        <mat-icon class="pt-2 mx-2 fs-5">{{arrow2}}</mat-icon>
                         <ul class="dropdown-content list-unstyled" *ngIf="activeLink=='menu-2'&&open" role="menu">
                             <li><a class="mimi-link" (click)="getActive('menu-2','close2')">{{'mini-menu' | translate}}</a></li>
                             <li><a class="mimi-link" (click)="getActive('menu-2','close2')">{{'mini-menu' | translate}}</a></li>
@@ -62,7 +62,7 @@
                     <div class="image" [class.active]="activeLink=='menu-3'">
                         <img src="assets/images/li.png" alt="icon" class="img-fluid">
                     </div>
-                    <div class="text link">
+                    <div class="text link w-100">
                         {{'menu-3' | translate}}
                     </div>
                 </a>
@@ -72,7 +72,7 @@
                     <div class="image" [class.active]="activeLink=='menu-4'">
                         <img src="assets/images/li.png" alt="icon" class="img-fluid">
                     </div >
-                    <div class="text link">
+                    <div class="text link w-100">
                         {{'menu-4' | translate}}
                     </div>
                 </a>

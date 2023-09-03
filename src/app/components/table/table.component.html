@@ -26,9 +26,6 @@
     </div>
   </div>
   <div class="mat-elevation-z8 example-container my-3">
-
-
-
     <table mat-table [dataSource]="dataSource" matSort cdkDropListOrientation="horizontal" cdkDropList
       (cdkDropListDropped)="drop($event)">
       <!-- id Column -->
@@ -44,12 +41,12 @@
             <div class="setting-image" [matMenuTriggerFor]="menuCheckbox">
               <img src="assets/images/settings.png" alt="settings" class="img-fluid">
             </div>
-            <mat-menu #menuCheckbox="matMenu">
-              <p>{{"Schedule"| translate}}</p>
+            <mat-menu class="matMenu" #menuCheckbox="matMenu" style="width: 200px;">
+              <p class="schedule">{{"Schedule"| translate}}</p>
               <div *ngFor="let head of heads;let i=index" class="check-div">
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between mx-2">
                   <input type="checkbox" id={{head}} name={{head}} value={{head}}
-                    [checked]='displayedColumns.includes(head)' (change)="colonShowAndHide(head)" class="d-block">
+                    [checked]='displayedColumns.includes(head)' (change)="colonShowAndHide(head)" class="d-block me-5">
                   <label for={{head}} class="d-block"> {{head | translate}}</label>
                 </div>
               </div>
@@ -94,26 +91,8 @@
         <th mat-header-cell cdkDrag *matHeaderCellDef>{{"daysOfWork" | translate}}</th>
         <td mat-cell *matCellDef="let element">
           <div class="days">
-            <span [class]="element.daysOfWork.includes(0)?'active-day':'not-active-day'">
-              {{'Sat' | translate}}
-            </span>
-            <span [class]="element.daysOfWork.includes(1)?'active-day':'not-active-day'">
-              {{'Sun' | translate}}
-            </span>
-            <span [class]="element.daysOfWork.includes(2)?'active-day':'not-active-day'">
-              {{'Mon' | translate}}
-            </span>
-            <span [class]="element.daysOfWork.includes(3)?'active-day':'not-active-day'">
-              {{'Tue' | translate}}
-            </span>
-            <span [class]="element.daysOfWork.includes(4)?'active-day':'not-active-day'">
-              {{'Wed' | translate}}
-            </span>
-            <span [class]="element.daysOfWork.includes(5)?'active-day':'not-active-day'">
-              {{'Thu' | translate}}
-            </span>
-            <span [class]="element.daysOfWork.includes(6)?'active-day':'not-active-day'">
-              {{'Fri' | translate}}
+            <span *ngFor="let day of days;let i=index" [class]="element.daysOfWork.includes(i)?'active-day':'not-active-day'">
+              {{day | translate}}
             </span>
           </div>
         </td>
@@ -140,8 +119,6 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <!-- <pagination-controls (pageChange)="currentPage = $event" [maxSize]="5" [directionLinks]="true"
-      [autoHide]="true"></pagination-controls> -->
   </div>
   <div class="pagination d-flex justify-content-between align-items-center flex-wrap mb-3">
     <div class="page-numbers d-flex align-items-center">
@@ -175,6 +152,5 @@
   </div>
 </div>
 
-
 <mat-paginator style="display: none;" [length]="dataSource?.data?.length" [pageSize]="pageSize"
-  [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)"></mat-paginator>
+  [pageSizeOptions]="pageSizeOptions"></mat-paginator>

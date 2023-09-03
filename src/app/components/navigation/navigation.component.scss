@@ -86,23 +86,29 @@ $wTwo:255px;
 .dropdown{
     .dropdown-btn{
         padding: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        ul{
+            width: 100%;
+        }
     }
     .dropdown-content{
         padding: 0;
         li{
+            padding-top: 10px;
             a{
                 text-decoration: none;
                 display: block;
-                padding: 20px;
+                padding: 10px 0;
+                padding-inline-end: 40px;
             }
             transition: .3s ease-in-out;
-            border-bottom: 3px solid transparent;
+            border-bottom: 2.5px solid transparent;
             &:hover{
-                border-bottom: 3px solid #2E2E2E;
+                border-bottom: 2.5px solid #2E2E2E;
                 background-color: #FEEE00;
-            }
-            .mat-icon{
-                color: red !important;
             }
         }
     }
