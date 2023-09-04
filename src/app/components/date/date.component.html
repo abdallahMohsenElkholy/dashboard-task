@@ -6,8 +6,8 @@
                     <div class="d-flex pt-2">
                         <p class="date-pra mb-2">{{'date' | translate}}</p>
                         <div class="pointers mb-2">
-                            <span class="span-1" (click)="calc(-1,'arrow')"></span>
-                            <span class="span-2" (click)="calc(1,'arrow')"></span>
+                            <span (click)="calc(-1,'arrow')"><mat-icon>keyboard_arrow_{{ltr?'left':'right'}}</mat-icon></span>
+                            <span (click)="calc(1,'arrow')"><mat-icon>keyboard_arrow_{{ltr?'right':'left'}}</mat-icon></span>
                         </div>
                     </div>
                 </div>

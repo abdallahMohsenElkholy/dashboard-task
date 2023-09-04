@@ -1,70 +1,30 @@
-
-$wOne:16.5%;
-$wTwo:255px;
-
+h5{
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 21px;
+    color: #CFCFCF;
+    padding: 20px 20px 0;
+    margin-bottom: 10px;
+}
 .logo{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 0 0 30px 0;
     padding-bottom: 50px;
     border-bottom: 1px solid #F4F7FE;
 }
 
-.side-navigation,.res-side-navigation{
-    .image{
-        height: fit-content;
-        padding: 20px;
-        border-radius:  50% 0 0 50%;
-    }
-    h5{
-        font-size: 12px;
-        font-weight: 400;
-        line-height: 21px;
-        color: #CFCFCF;
-        padding: 20px 20px 0;
-        margin-bottom: 0;
-    }
-
-    >ul {
-        padding: 0;
-        >li >a {
-            display: flex;
-            text-decoration: none;
-            cursor: pointer;
-            .text{
-                padding: 20px;
-            }
-        }   
-    }
+.dropdown-container,.about {
+    padding: 0;
+    >li >a {
+        display: flex;
+        text-decoration: none;
+        cursor: pointer;
+        .text{
+            padding: 20px;
+        }
+    }   
 }
-.ltr-res-side-navigation{
-    .image{
-        height: fit-content;
-        padding: 20px;
-        border-radius:  0 50% 50% 0;
-    }
-    h5{
-        font-size: 12px;
-        font-weight: 400;
-        line-height: 21px;
-        color: #CFCFCF;
-        padding: 20px 20px 0;
-        margin-bottom: 0;
-    }
-
-    >ul {
-        padding: 0;
-        >li >a {
-            display: flex;
-            cursor: pointer;
-            .text{
-                padding: 20px;
-            }
-        }   
-    }
-}
-
 
 .link{
     color: #2E2E2E;
@@ -86,7 +46,7 @@ $wTwo:255px;
 .dropdown{
     .dropdown-btn{
         padding: 20px;
-        width: 100%;
+        width: 255px;
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
@@ -114,9 +74,14 @@ $wTwo:255px;
     }
 }
 
-
 .responsive-nav{
+    .linkImage{
+        height: fit-content;
+        padding: 20px;
+        border-radius:  50% 0 0 50%;
+    }
     .nav-icon{
+        margin-inline-start: 8px;
         cursor:pointer;
         display: flex;
         justify-content: center;
@@ -125,9 +90,9 @@ $wTwo:255px;
         height: 30px;
         position: absolute;
         background-color: #FEEE00;
-        top: 13%;
+        top: 60px;
         border-radius: 50%;
-        right: 100%;
+        right: 94%;
         transform: translate(0, -50%);
         cursor: pointer;
         mat-icon {
@@ -139,7 +104,7 @@ $wTwo:255px;
     }
     .image{
         height: fit-content;
-        padding: 20px;
+        padding: 20px 20px 50px;
         border-radius:50% 0 0 50%;
     }
     position: fixed;
@@ -147,10 +112,16 @@ $wTwo:255px;
     bottom: 0;
     background-color: #fff;
     border-right: 0;
-    width: $wOne;
+    width: 17.4%;
     z-index: 999;
 }
+
 .ltr-responsive-nav{
+    .linkImage{
+        height: fit-content;
+        padding: 20px;
+        border-radius:  0 50% 50% 0;
+    }
     .nav-icon{
         cursor:pointer;
         display: flex;
@@ -160,9 +131,9 @@ $wTwo:255px;
         height: 30px;
         position: absolute;
         background-color: #FEEE00;
-        top: 13%;
+        top: 60px;
         border-radius: 50%;
-        left: 100%;
+        left: 96%;
         transform: translate(0, -50%);
         cursor: pointer;
         mat-icon {
@@ -174,7 +145,7 @@ $wTwo:255px;
     }
     .image{
         height: fit-content;
-        padding: 20px;
+        padding: 20px 20px 50px;
         border-radius:0 50% 50% 0;
     }
     position: fixed;
@@ -182,134 +153,88 @@ $wTwo:255px;
     bottom: 0;
     background-color: #fff;
     border-left: 0;
-    width: $wOne;
+    width: 17.4%;
     z-index: 999;
 }
 
-// @media screen and (max-width: 505px) {
-//     .responsive-nav ,.ltr-responsive-nav{
-//         width: 180px;
-//         .image{
-//             width: 95px;
-//         } 
-//     }
-// }
-// @media screen and (max-width: 355px) {
-//     .responsive-nav ,.ltr-responsive-nav{
-//         width: 150px;
-//         .image{
-//             width: 87px;
-//         } 
-//     }
-// }
-
-
 .openAr {
-    animation: openAr .6s ease forwards;
+    animation: openAr .4s ease forwards;
 }
 
 .closeAr {
-    animation: closeAr .6s ease forwards;
+    animation: closeAr .4s ease forwards;
 }
 
 .openEn {
-    animation: openEn .6s ease forwards;
+    animation: openEn .4s ease forwards;
 }
 
 .closeEn {
-    animation: closeEn .6s ease forwards;
+    animation: closeEn .4s ease forwards;
 }
 
 @keyframes closeAr {
     from{
-        right: 0;
+        transform: translate(10%,0);
     }
     to {
-        right: -$wOne;
+        transform: translate(107%,0);
     }
 }
 
 @keyframes openAr {
     from{
-        right: -$wOne;
+        transform: translate(107%,0);
     }
     to {
-        right: 0;
+        transform: translate(10%,0);
     }
 }
 
 @keyframes closeEn {
     from{
-        left: 0;
+        transform: translate(-10%,0);
     }
     to {
-        left: -$wOne;
+        transform: translate(-107%,0);
     }
 }
 
 @keyframes openEn {
     from{
-        left: -$wOne;
+        transform: translate(-107%,0);
     }
     to {
-        left: 0;
+        transform: translate(-10%,0);
     }
 }
 
 @media screen and (max-width: 1399px) {
     .ltr-responsive-nav,.responsive-nav{
-        width: $wTwo;
+        width: 270px;
     }
 
-    .openAr {
-        animation: openAr2 .6s ease forwards;
-    }
-    
-    .closeAr {
-        animation: closeAr2 .6s ease forwards;
-    }
-    
-    .openEn {
-        animation: openEn2 .6s ease forwards;
-    }
-    
-    .closeEn {
-        animation: closeEn2 .6s ease forwards;
-    }
 }
 
-@keyframes closeAr2 {
-    from{
-        right: 0;
+@media screen and (max-width: 991px) {
+    .ltr-responsive-nav,.responsive-nav{
+        width: 255px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 0px 8px 0px;
     }
-    to {
-        right: -$wTwo;
+
+    .ltr-responsive-nav .nav-icon{
+        left: 100%;
     }
+
+    .responsive-nav .nav-icon{
+        right: 98%;
+    }
+
 }
 
-@keyframes openAr2 {
-    from{
-        right: -$wTwo;
+@media screen and (max-width: 360px) {
+    .ltr-responsive-nav,.responsive-nav{
+        width: 220px;
     }
-    to {
-        right: 0;
-    }
-}
 
-@keyframes closeEn2 {
-    from{
-        left: 0;
-    }
-    to {
-        left: -$wTwo;
-    }
-}
-
-@keyframes openEn2 {
-    from{
-        left: -$wTwo;
-    }
-    to {
-        left: 0;
-    }
 }

@@ -61,7 +61,7 @@ table {
     border-radius: 8px !important;
     overflow: hidden;
     input{
-      padding-right: 30px;
+      padding-left: 30px;
       font-size: 16px;
       color: #292D32;
       font-weight: 400;
@@ -79,11 +79,12 @@ table {
     mat-icon{
       top: -27px;
       right: -30px;
-      color: rgba(41, 45, 50,.5);;
+      color: rgba(41, 45, 50,.5);
       font-size: 23px;
     }
   }
 }
+
 
 .users-table{
 

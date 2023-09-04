@@ -1,28 +1,55 @@
-<div [class]="ltr?'ltr-statistics ':'statistics'" class="d-flex justify-content-between flex-column">
-    <div>
-        <h2>{{'statistics' |translate}}</h2>
+<div class="d-flex justify-content-between flex-column">
+    <div class="mb-3">
+        <h2 class="title">{{'statistics' |translate}}</h2>
     </div>
-    <div class="align-self-center mb-4">
+    <div class="align-self-center my-4">
         <div class="images">
-            <div class="img-1">
-                <img class="w-100" src="assets/images/Medium.png" alt="Medium">
+            <div class="img-one">
+                <circle-progress
+                    [percent]="50"
+                    [radius]="rates.r1"
+                    [outerStrokeWidth]="12"
+                    [innerStrokeWidth]="10"
+                    [outerStrokeColor]="'#0771DE'"
+                    [innerStrokeColor]="'#E5E5EF'"
+                    [animation]="true"
+                    [animationDuration]="100"
+                    [clockwise]="!ltr"
+                    [title]="''"
+                    [subtitle]="''"
+                    ></circle-progress>
+                    <div class="img-two start-50">
+                       <div [class]="ltr?'ltr-inner':'inner'">
+                            <circle-progress
+                                [title]="''"
+                                [subtitle]="''"
+                                [startFromZero]="false"
+                                [percent]="32"
+                                [radius]="rates.r2"
+                                [outerStrokeWidth]="12"
+                                [innerStrokeWidth]="10"
+                                [outerStrokeColor]="'#FDB841'"
+                                [innerStrokeColor]="'#E5E5EF'"
+                                [animation]="true"
+                                [animationDuration]="100"
+                                [clockwise]="!ltr"
+                            ></circle-progress>
+                        </div>
+                        <div class="content">
+                             <span class="title">{{deviceNum}}</span>
+                             <span class="pra">{{device | translate}}</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="img-2">
-                <img class="w-100" src="assets/images/Inner.png" alt="Inner">
-            </div>
-            <div class="content">
-                <h5>158</h5>
-                <p>{{'device'|translate}}</p>
-            </div>
-        </div>
     </div>
-    <div class="choices d-flex justify-content-around">
+    <div class="d-flex justify-content-around" [class]="ltr?'ltr-choices text-start':'choices text-end'">
         <div class="one">
-            <h5>108</h5>
+            <h2 class="title">{{rates.r1}}</h2>
             <p>{{'choice.one'|translate}}</p>
         </div>
         <div class="two">
-            <h5>108</h5>
+            <h2 class="title">{{rates.r2}}</h2>
             <p>{{'choice.two'|translate}}</p>
         </div>
     </div>

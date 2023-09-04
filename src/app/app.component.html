@@ -7,7 +7,7 @@
  </div>
   <div class="row px-0 px-lg-3">
     <div [ngClass]="{'col-xxl-2': isOpenedSide, 'col-xxl-12': !isOpenedSide}">
-      <app-navigation (isSideOpenedEvt)="onToggleSideNav($event)" [ltr]="ltr"/>
+      <app-side-nav (isSideOpenedEvt)="onToggleSideNav($event)" [ltr]="ltr"/>
     </div>
     <div [ngClass]="{'col-xxl-10': isOpenedSide, 'col-xxl-12': !isOpenedSide}" class="pt-lg-3 px-lg-0">
       <div class="row">
